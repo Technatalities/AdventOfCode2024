@@ -24,6 +24,12 @@ def inc(nums):
     else:
         return False
 
+
+def exclude(list, i):
+    return list[:i] + list[i + 1 :]
+
+
+# Part One
 with open("daytwo.txt") as text:
     for row in text:
         nums = list(map(int, row.split()))  
@@ -32,4 +38,17 @@ with open("daytwo.txt") as text:
         elif inc(nums):
             safeone += 1
 
+# Part Two
+with open("daytwo.txt") as text:
+    for row in text:
+        nums = list(map(int, row.split()))
+        for i in range(len(nums)):
+            if dec(exclude(nums, i)):
+                safetwo += 1
+                break 
+            elif inc(exclude(nums, i)):
+                safetwo += 1
+                break
+
 print("Part One:", safeone)
+print("Part Two:", safetwo)
